@@ -1,0 +1,12 @@
+.users{
+    font-weight: bold;
+    
+    
+}
+.buttons{
+    display: flex;
+
+}
+.page{
+    border: 1px solid black;
+}

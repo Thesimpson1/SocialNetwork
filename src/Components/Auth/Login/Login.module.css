@@ -1,0 +1,18 @@
+
+.login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 100px;
+    
+}
+.loginText{
+    
+    color: rgb(255, 0, 0);
+    font-size: 30px;
+    margin: 10px;
+}
+.loginForm{
+    margin: 10px;
+}

@@ -1,0 +1,49 @@
+.profileInfo{
+  display: flex;
+}
+.profileInfo img{
+
+  width: 200px;
+  height: 300px; 
+  margin: 10px 20px 10px 20px;
+  border-radius: 5px;
+}
+.photoConteiner{
+  width: 240px;
+  height:360px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  
+}
+  .changePhoto .btnTertiary{
+    color:#555;
+    text-align: center;
+    line-height:30px;
+    width:200px;
+    margin:auto;
+    display:block;
+    background-color: rgb(198, 198, 198);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .changePhoto .inputFile{
+    position:absolute;
+    z-index:-1
+  }
+  .ownInfoContainer{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    margin-left: 20px;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  .profileInfoDataConteiner{
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .profileInfoData{
+    color: #468cd1;
+    margin-left: 150px;
+  }
+
+

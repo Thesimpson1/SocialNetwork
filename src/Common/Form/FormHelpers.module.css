@@ -1,0 +1,9 @@
+.textarea textarea{
+    border: 2px solid red;
+    
+}
+.textarea span{
+    color: red;
+    margin-bottom: 10px;
+    
+}

@@ -1,0 +1,21 @@
+.nav {
+  width: 20%;
+  height: auto;
+  background-color: rgb(198, 198, 198);
+  
+}
+.nav a{
+  text-decoration: none;
+  font-size: 20px;
+  line-height: 40px;
+  color:rgb(0, 0, 0);
+  
+  
+}
+.nav_wrap{
+  padding: 30px;
+  
+}
+.nav a.active{
+  color: rgb(255, 217, 0);
+}

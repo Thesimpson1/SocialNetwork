@@ -1,0 +1,12 @@
+.App {
+  padding: 0;
+  background-color: rgb(198, 198, 198);
+}
+.startPage{
+  display:flex;
+}
+.wrapWeight{
+  width: 1000px;
+  margin: 0 auto;
+  
+}
