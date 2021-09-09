@@ -1,4 +1,4 @@
-const ADD_MESSAGE =  'DIALOG/ADD_MESSAGE';
+const ADD_MESSAGE =  'DIALOG/ADD_MESSAGE'
 
 const initial = {
     
@@ -18,21 +18,25 @@ const initial = {
             { id: '5', messages: 'Hello, how are you' },
             { id: '6', messages: 'Hello, how are you' }
         ]
-};
+}
 
-const reducerDialogs = (state = initial, action) =>{
+export type initialStateType = typeof initial
+const reducerDialogs = (state = initial, action: any): initialStateType =>{
 
     switch (action.type) {
         case ADD_MESSAGE:
-            
-            return{...state, dataMessages: [...state.dataMessages, { id: '7', messages: action.textMessage.areaPost }]};
+            return{...state, dataMessages: [...state.dataMessages, { id: '7', messages: action.textMessage.areaPost }]}
         default:
-            return state;
-    };
-}; 
+            return state
+    }
+} 
 
-export const addMessageAC = (textMessage) => {
+type addMessageACType = {
+    type: typeof ADD_MESSAGE
+    textMessage: string
+}
+export const addMessageAC = (textMessage:string): addMessageACType => {
     return {type: ADD_MESSAGE, textMessage}
-};
+}
 
-export default reducerDialogs;
+export default reducerDialogs
