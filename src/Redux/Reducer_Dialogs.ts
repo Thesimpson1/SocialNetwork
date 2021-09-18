@@ -21,7 +21,7 @@ const initial = {
 }
 
 export type initialStateType = typeof initial
-const reducerDialogs = (state = initial, action: any): initialStateType =>{
+const reducerDialogs = (state = initial, action: addMessageACType): initialStateType =>{
 
     switch (action.type) {
         case ADD_MESSAGE:
@@ -31,11 +31,12 @@ const reducerDialogs = (state = initial, action: any): initialStateType =>{
     }
 } 
 
+type textMessage = {areaPost: string}
 type addMessageACType = {
     type: typeof ADD_MESSAGE
-    textMessage: string
+    textMessage: textMessage
 }
-export const addMessageAC = (textMessage:string): addMessageACType => {
+export const addMessageAC = (textMessage: textMessage): addMessageACType => {
     return {type: ADD_MESSAGE, textMessage}
 }
 

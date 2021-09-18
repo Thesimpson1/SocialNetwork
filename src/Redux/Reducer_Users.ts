@@ -1,6 +1,9 @@
 import { copyAndMap } from "../Common/Helper/copyAndMap"
 import { usersApi } from "../Dal/Api"
 import { photosType } from "./Reducer_Profile"
+import { ThunkAction } from 'redux-thunk'
+import { AppStateType } from './../Types_For_TypeScript/Main_App_Types'
+import { Dispatch } from "react"
 
 const FOLLOW = 'USERS/FOLLOW'
 const UNFOLLOW = 'USERS/UNFOLLOW'
@@ -11,7 +14,7 @@ const IS_FETCHING = 'USERS/IS_FETCHING'
 const CHANGE_FOLLOW_PROGRESS = 'USERS/CHANGE_FOLLOW_PROGRESS'
 
 type initialStateType = {
-    users: Array<string>
+    users: Array<usersType>
     totalCount: number
     pageSize: number
     currentPage: number
@@ -26,7 +29,7 @@ const initial: initialStateType = {
     isFetching: false,
     followingUser: []
 }
-const reducerUsers = (state = initial, action: any): initialStateType => {
+const reducerUsers = (state = initial, action: MainAuthActionType): initialStateType => {
 
     switch (action.type) {
         case UNFOLLOW:
@@ -38,7 +41,7 @@ const reducerUsers = (state = initial, action: any): initialStateType => {
                 ...state, users: copyAndMap(state.users, action.userId, 'id', {followed : true})
             }
         case GET_USERS:
-            //[...action.users]
+
             return {
                 ...state, users: action.users
             }
@@ -60,7 +63,7 @@ const reducerUsers = (state = initial, action: any): initialStateType => {
             }
 
         default:
-            return state;
+            return state
     }
 }
 
@@ -89,9 +92,9 @@ type usersType = {
 }
 type getUsersACType = {
     type: typeof GET_USERS
-    users: usersType
+    users: usersType[]
 }
-export const getUsersAC = (users: usersType): getUsersACType => {
+export const getUsersAC = (users: usersType[]): getUsersACType => {
     return { type: GET_USERS, users }
 }
 
@@ -127,45 +130,53 @@ type changeFollowProgressACType = {
 export const changeFollowProgressAC = (isFollowingProgress: boolean, userId: number): changeFollowProgressACType => {
     return { type: CHANGE_FOLLOW_PROGRESS, isFollowingProgress, userId }
 }
+type followUnfollowHelpFunctionType = (apiMethod: any, 
+        actionCreator: (userId:number) => unfollowACType|followACType, 
+            dispatch: Dispatch<unfollowACType|followACType|changeFollowProgressACType>, 
+                userId: number) => void
 
-const followUnfollowHelpFunction = async (apiMethod: any , actionCreator: (userId: number) => void, dispatch: any, userId: number) => {
-    dispatch(changeFollowProgressAC(true, userId));
-        let response = await apiMethod(userId);
+const followUnfollowHelpFunction: followUnfollowHelpFunctionType = async (apiMethod, actionCreator, dispatch, userId) => {
+    dispatch(changeFollowProgressAC(true, userId))
+        let response = await apiMethod(userId)
         if (response.data.resultCode === 0) {
-            dispatch(actionCreator(userId));
-            dispatch(changeFollowProgressAC(false, userId));
+            dispatch(actionCreator(userId))
+            dispatch(changeFollowProgressAC(false, userId))
         }
-};
-export const getUsersThunk = () => {
-    return async (dispatch: any) => {
+}
 
-        dispatch(isFetchingAC(true));
-        let response = await usersApi.getAllUsers();
-        dispatch(isFetchingAC(false));
-        dispatch(getUsersAC(response.data.items));
-        dispatch(getTotalCountAC(response.data.totalCount));
-    }; 
-};
-export const getCurrentPageThunk = (currentPageFromState: number) => {
-    return async (dispatch: any) => {
+type MainAuthActionType = unfollowACType|followACType|getTotalCountACType|currentPageACType|isFetchingACType|changeFollowProgressACType|getUsersACType
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, MainAuthActionType>
 
-        dispatch(isFetchingAC(true));
-        let response = await usersApi.setPage(currentPageFromState);    
-        dispatch(isFetchingAC(false));
-        dispatch(getUsersAC(response.data.items));
+export const getUsersThunk = (): ThunkType => {
+    return async (dispatch) => {
+
+        dispatch(isFetchingAC(true))
+        let response = await usersApi.getAllUsers()
+        dispatch(isFetchingAC(false))
+        dispatch(getUsersAC(response.data.items))
+        dispatch(getTotalCountAC(response.data.totalCount))
+    } 
+}
+export const getCurrentPageThunk = (currentPageFromState: number): ThunkType => {
+    return async (dispatch) => {
+
+        dispatch(isFetchingAC(true))
+        let response = await usersApi.setPage(currentPageFromState)    
+        dispatch(isFetchingAC(false))
+        dispatch(getUsersAC(response.data.items))
             
-    };
-};
-export const unfollowThunk = (userId: number) => {
-    return async (dispatch: any) => {
-       return  followUnfollowHelpFunction(usersApi.deleteUser, unfollowAC, dispatch, userId);
-    };
-}; 
-export const followThunk = (userId: number) => {
-    return async (dispatch: any) => {
-        return followUnfollowHelpFunction(usersApi.postUser, followAC, dispatch, userId);
-    }; 
-}; 
+    }
+}
+export const unfollowThunk = (userId: number): ThunkType => {
+    return async (dispatch) => {
+       return  followUnfollowHelpFunction(usersApi.deleteUser, unfollowAC, dispatch, userId)
+    }
+} 
+export const followThunk = (userId: number): ThunkType => {
+    return async (dispatch) => {
+        return followUnfollowHelpFunction(usersApi.postUser, followAC, dispatch, userId)
+    } 
+} 
 
-export default reducerUsers;
+export default reducerUsers
 
