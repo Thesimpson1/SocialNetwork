@@ -38,7 +38,7 @@ export const Textarea: FC<FieldRenderProps<string, HTMLElement>> = ({ input, met
 
 
 
-export function createField<NameType extends string> (name: NameType, component: ComponentFormType,  placeholder: string|null, validate: FieldValidator<string> | undefined, labelName: string, props = {}){
+export function createField<NameType extends string> (name: NameType, component: ComponentFormType,  placeholder: string|null, validate: FieldValidator<string> | undefined, labelName: string|null, props = {}){
   return <div>
     <label><b>{labelName}</b></label>
     <Field name={name} component={component} placeholder={placeholder} validate = {validate} {...props}/>

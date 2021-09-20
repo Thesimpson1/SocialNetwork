@@ -4,7 +4,7 @@ import s from  './Nav.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle,  faEnvelope, faUsers, faWindowMaximize, faMusic, faCogs } from '@fortawesome/free-solid-svg-icons'
 
-const Nav = (props) =>{
+const Nav: React.FC = (props) =>{
   return (
     <div className = {s.nav}>
       <div className = {s.nav_wrap}>

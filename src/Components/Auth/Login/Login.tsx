@@ -5,9 +5,9 @@ import { Redirect } from 'react-router'
 import { useSelector } from 'react-redux'
 import { AppStateType } from '../../../Types_For_TypeScript/Main_App_Types'
 
-type PropsType = {}
-const Login: React.FC<PropsType> = (props) => {
 
+const Login: React.FC = props => {
+  
   const isAuth = useSelector((state: AppStateType) => state.auth.isAuth)
   const errorAuth = useSelector((state: AppStateType) => state.auth.errorAuth)
 

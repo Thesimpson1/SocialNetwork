@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons'
 
 
-const Header = (props) =>{
+const Header: React.FC = (props) =>{
   return (
     <div className = {s.header}>
       <div className = {s.leftSideContainer}>

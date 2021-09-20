@@ -83,7 +83,7 @@ export const followAC = (userId: number): followACType => {
     return { type: FOLLOW, userId }
 }
 
-type usersType = {
+export type usersType = {
     id: number
     name: string
     status: string

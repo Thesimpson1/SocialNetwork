@@ -5,13 +5,14 @@ import Messages from './Message/Message';
 import DialogsForm from './DialogsForm';
 import { useSelector } from 'react-redux';
 import { withRedirectToLoginHoc } from '../Hoc/WithRedirectToLoginHoc';
+import { AppStateType } from '../../Types_For_TypeScript/Main_App_Types';
 
-const Dialogs = (props) => {
+const Dialogs: React.FC = (props) => {
 
-  const friends = useSelector(state => state.dialogs.dataFriends);
-  const messages = useSelector(state => state.dialogs.dataMessages);
+  const friends = useSelector((state:AppStateType) => state.dialogs.dataFriends);
+  const messages = useSelector((state:AppStateType) => state.dialogs.dataMessages);
   const friendsMap = friends.map(i => <Friends name={i.name} id={i.id} key={i.id} />)
-  const messagesMap = messages.map(i => <Messages messages={i.messages} id={i.id} key={i.id} />)
+  const messagesMap = messages.map(i => <Messages messages={i.messages}  key={i.id} />)
   
   return (
     <div>
