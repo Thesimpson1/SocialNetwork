@@ -1,8 +1,8 @@
-import React from 'react';
-import s from './Post.module.css';
+import React from 'react'
+import s from './Post.module.css'
 
-
-const Post = (props) => {
+type PropsType = {post: string, like: number}
+const Post: React.FC<PropsType> = (props) => {
   
   return (
     <div>
@@ -12,8 +12,8 @@ const Post = (props) => {
       </div>
       <div>Like{props.like}</div>
     </div>
-  );
+  )
 }
 
 
-export default Post;
+export default Post

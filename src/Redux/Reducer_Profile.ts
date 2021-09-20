@@ -67,7 +67,7 @@ const reducerProfile = (state = initial, action: MainAuthActionType):initialStat
             return state
     }
 }
-type newTextType = {
+export type newTextType = {
     areaPost:string
 }
 type addPostACType = {

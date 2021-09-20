@@ -5,7 +5,7 @@ import s from './Profile.module.css';
 import ProfileForm from './ProfileForm';
 import ProfileInfoContainer from './Profile_info/Profile_info_Container_widthHook';
 
-const Profile = (props) => {
+const Profile: React.FC = (props) => {
   
   return (
 
